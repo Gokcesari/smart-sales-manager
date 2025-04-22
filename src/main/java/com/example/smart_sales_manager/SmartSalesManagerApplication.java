@@ -1,6 +1,7 @@
 package com.example.smart_sales_manager;
 
-import com.example.smart_sales_manager.model.Product;
+import com.example.smart_sales_manager.helpers.LogHelper;
+import com.example.smart_sales_manager.models.Product;
 
 import manager.ProductManager;
 
@@ -17,9 +18,12 @@ public class SmartSalesManagerApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-	    System.out.println("Uygulama başlatıldı!");
+		LogHelper.info("Uygulama başlatıldı!");
 
-	    Product p = new Product("AirPods", 4500.0, "Elektronik");
+		//LogHelper.error("Hata oluştu (try catchte catch icerisinde kullanilabilir)");
+		//LogHelper.debug("debug için kullanabilirsin");
+		//LogHelper.warn("warn için kullanabilirsin");
+		Product p = new Product("AirPods", 4500.0, "Elektronik");
 	    ProductManager manager = ProductManager.getInstance();
 	    manager.addProduct(p);
 	}

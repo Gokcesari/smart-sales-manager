@@ -1,6 +1,6 @@
 package manager;
 
-import com.example.smart_sales_manager.model.Product;
+import com.example.smart_sales_manager.models.Product;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

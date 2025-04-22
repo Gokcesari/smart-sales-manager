@@ -1,4 +1,4 @@
-package com.example.smart_sales_manager.model;
+package com.example.smart_sales_manager.models;
 
 public class Product {
 
