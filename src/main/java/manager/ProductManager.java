@@ -1,17 +1,22 @@
-package manager;
+package com.example.smartsalesmanager.manager;
 
-import com.example.smart_sales_manager.models.Product;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.example.smartsalesmanager.model.Product;
+import com.example.smartsalesmanager.observer.StockObserver;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProductManager {
 
     private static ProductManager instance;
-    private static final Logger logger = LoggerFactory.getLogger(ProductManager.class);
+    private List<Product> products = new ArrayList<>();
+    private StockObserver stockObserver;
 
-    private ProductManager() {}
+    private ProductManager() {
+        this.stockObserver = new StockObserver();
+    }
 
-    public static ProductManager getInstance() {
+    public static synchronized ProductManager getInstance() {
         if (instance == null) {
             instance = new ProductManager();
         }
@@ -19,7 +24,15 @@ public class ProductManager {
     }
 
     public void addProduct(Product product) {
-        logger.info("Ürün eklendi → İsim: {}, Fiyat: {}, Tür: {}",
-                product.getName(), product.getPrice(), product.getType());
+        products.add(product);
+        stockObserver.checkStock(product);
+    }
+
+    public void deleteProduct(Long id) {
+        products.removeIf(p -> p.getId().equals(id));
+    }
+
+    public List<Product> getProducts() {
+        return products;
     }
 }
